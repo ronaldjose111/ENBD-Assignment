@@ -1,5 +1,4 @@
 Account Dataset
-
 {"AccountOpeningTime": "2021-06-07 00:00:00","Type": "Account","AccountId": 1,"AccountType": 1}
 {"AccountOpeningTime": "2021-06-07 00:00:30","Type": "Account","AccountId": 4,"AccountType": 1}
 {"AccountOpeningTime": "2021-06-07 00:00:50","Type": "Account","AccountId": 3,"AccountType": 2}
@@ -12,8 +11,8 @@ Account Dataset
 {"AccountOpeningTime": "2021-06-07 00:05:30","Type": "Account","AccountId": 7,"AccountType": 2}
 {"AccountOpeningTime": "2021-06-07 00:05:50","Type": "Account","AccountId": 8,"AccountType": 3}
 
-Loan Dataset
 
+Loan Dataset
 {"LoanOpeningTime": "2021-06-07 00:00:10","Type": "Loan","LoanId": 1,"AccountId": 1,"Amount": 10000.00}
 {"LoanOpeningTime": "2021-06-07 00:00:20","Type": "Loan","LoanId": 2,"AccountId": 3,"Amount": 2000.00}
 {"LoanOpeningTime": "2021-06-07 00:00:40","Type": "Loan","LoanId": 3,"AccountId": 4,"Amount": 3000.00}
