@@ -1,0 +1,100 @@
+Task:-
+
+When a loan is utilized by a customer, loan and account records are created. Given these two unbounded sources (Loan and Account) implement a streaming(Spark,Flink or any other one)  application that calculates the total number of loans, total amount of loans and loans created on last minute per account type.
+
+·       For each load record exactly one account record is generated
+·       Assume that maximum latency between the loan and account records is 30 seconds. Records are created at most in 30 second gap.
+·       Output must be calculated for each minute.
+·       Total amount and count must be calculated from application start. At the application start count and amount should be 0.
+·       Last minute count must contain the number of Loans created for the previous minute.
+·       This must be written in Java or Scala.  
+
+Input Format
+
+Account
+
+{​​​​​​​
+   "type":"record",
+   "name”:”AccountSchema”,
+   "fields":[
+      {​​​​​​​​​​​​​​
+         "name”:”AccountId”,
+         "type”:”long”
+      }​​​​​​​​​​​​​​,
+      {​​​​​​​​​​​​​​
+         "name”:”AccountType”,
+         "type”:”int”,
+         “valid_values”:”1,2,3,4”
+      }​​​​​​​​​​​​​​
+   ]
+}​​​​​​​​​​​​​​
+
+
+Loan
+
+{​​​​​​​​​​​​​​
+   "type":"record",
+   "name”:”LoanSchema”,
+   "fields":[
+     {​​​​​​​​​​​​​​
+         "name”:”LoanId”,
+         "type”:”long”
+      }​​​​​​​​​​​​​​,
+      {​​​​​​​​​​​​​​
+         "name”:”AccountId”,
+         "type”:”long”
+      }​​​​​​​​​​​​​​,
+      {​​​​​​​​​​​​​​
+         "name”:”Amount”,
+         "type”:”decimal”
+      }​​​​​​​​​​​​​​
+   ]
+}​​​​​​​​​​​​​​
+
+
+Output Format
+
+{​​​​​​​​​​​​​​
+   "type":"record",
+   "name”:”LoanAggSchema”,
+   "fields":[
+     {​​​​​​​​​​​​​​
+         "name”:”AccountType”,
+         "type”:”int”
+      }​​​​​​​​​​​​​​,
+      {​​​​​​​​​​​​​​
+         "name”:”TotalCount”,
+         "type”:”int”
+      }​​​​​​​​​​​​​​,
+      {​​​​​​​​​​​​​​
+         "name”:”TotalAmount”,
+         "type”:”decimal”
+      }​​​​​​​​​​​​​​,
+      {​​​​​​​​​​​​​​
+         "name”:”LastMinuteCount”,
+         "type”:”int”
+      }​​​​​​​​​​​​​​,
+   ]
+}​​​​​​​​​​​​​​
+
+Sample Input
+00:00:00 Account 1,1
+00:00:10 Loan 1,1,10000.00
+00:00:20 Loan 2,3,2000.00
+00:00:30 Account 4,1
+00:00:40 Loan 3,4,3000.00
+00:00:50 Account 3,2
+00:01:10 Loan 4,7,6000.00
+00:01:30 Account 7,2
+00:01:50 Loan 5,8,6000.00
+00:02:50 Account 8,3
+
+Sample Output
+00:01:00 1,2,13000.00,2
+00:01:00 2,1,2000.00,1
+00:02:00 1,2,13000.00,0
+00:02:00 2,1,8000.00,1
+00:03:00 1,2,13000.00,0
+00:03:00 2,1,8000.00,0
+00:04:00 1,2,13000.00,0
+00:04:00 2,1,8000.00,0
