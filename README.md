@@ -6,3 +6,4 @@ Language used: Scala
 Streaming API: Spark structured streaming
 Author: Ronald
 Remarks: ENBD Assignment
+ 
