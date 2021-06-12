@@ -77,7 +77,6 @@ object ENBDAssignment extends App {
 	Complete output mode is not supported by spark in two streaming dataset joins, hence not calculating total amount and total count from beginning*/
 
 	val outputDf = windowAggDf.select("window.end", "AccountType", "TotalCount", "TotalAmount")
-	//.orderBy("window.end")
 
 	//write final output to sink
 	val finalDF = outputDf.writeStream
