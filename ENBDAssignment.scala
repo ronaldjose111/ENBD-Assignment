@@ -20,7 +20,7 @@ object ENBDAssignment extends App {
 	.master("local[*]")
 	.config("spark.streaming.stopGracefullyOnShutdown", true)
 	.config("spark.sql.shuffle.partitions", 3)/*Setting number of partitions after Shuffle/Join to 3 for better performance in this case of small dataset,
-	default is 200*/
+	default is 200 which is ideal for big datasets*/
 	.getOrCreate()
 
 	//Defining Account Schema
